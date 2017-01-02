@@ -1,0 +1,184 @@
+<!-- Adapted from Wes Bos Javascript 30 Course -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Acoustical Firebats</title>
+  <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Josefin+Sans" rel="stylesheet">
+</head>
+<body>
+  <style>
+    html {
+      box-sizing: border-box;
+      background:#a3014a;
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      font-weight: 200;
+    }
+    body {
+      margin: 0;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    
+    button {
+        border: none;
+        background-color: #a3014a;
+        font-size: 2rem;
+        color: white;
+        width: 200px;
+        height: 70px;
+        font-family: 'EB Garamond', serif;
+        transition: background-color 1s;
+    }
+    
+    button:hover {
+        background-color: #61002c;
+    }
+
+    .panels {
+      min-height:100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .panel {
+      background:#a3014a;
+      box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
+      color:white;
+      text-align: center;
+      align-items:center;
+      /* Safari transitionend event.propertyName === flex */
+      /* Chrome + FF transitionend event.propertyName === flex-grow */
+      transition:
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s;
+      font-size: 20px;
+      background-size:cover;
+      background-position:center;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel1 { background-image:url(./branch.jpg); }
+    .panel2 { background-image:url(./tunnel_pic.jpg); }
+
+    .panel > * {
+      margin:0;
+      width: 100%;
+      transition:transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .panel > *:first-child {
+        transform: translateY(-100%);
+    }
+    
+    .panel > *:last-child {
+        transform: translateY(100%);
+    }
+    
+    .panel.open-active > *:first-child {
+        transform: translateY(0);
+    }
+    
+    .panel.open-active > *:last-child {
+        transform: translateY(0);
+    }
+
+    .panel p {
+      text-transform: uppercase;
+      font-family: 'Josefin Sans', sans-serif;
+      text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+      font-size: 2em;
+    }
+    .panel p:nth-child(2) {
+      font-size: 4em;
+    }
+
+    .panel.open {
+      flex: 5; 
+      font-size:40px;
+    }
+
+    .cta {
+      color:white;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 900px) {
+        .panels, .panel {
+            display: block;
+        }
+        
+        .panel {
+            padding: 10% 5%;
+        }
+        
+        .panel p {
+            padding: 10% 5%;
+        }
+        
+        .panel.open {
+          flex: 5; 
+          font-size:20px;
+        }
+        
+        .panel p:nth-child(2) {
+            display: none;
+        }
+
+        .panel > *:first-child {
+            transform: translateY(0);
+        }
+        
+        .panel > *:last-child {
+            transform: translateY(0);
+        }
+    }
+
+  </style>
+
+
+  <div class="panels">
+    <div class="panel panel1">
+      <p>Acoustical Firebats</p>
+      <p>AFB</p>
+      <p><a href="http://www.blog.acousticalfirebats.com" target="_blank"><button>Read</button></a></p>
+    </div>
+    <div class="panel panel2">
+      <p>Light The Tunnel</p>
+      <p>LTT</p>
+      <p><a href="http://www.ltt.acousticalfirebats.com" target="_blank"><button>Read</button></a></p>
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+    
+    function toggleOpen(e) {
+        if (e.srcElement.nodeName !== "BUTTON") {
+            this.classList.toggle('open');
+        }
+    }
+    
+    function toggleActive(e) {
+        if (e.propertyName.includes('flex')) {
+            this.classList.toggle('open-active');
+        }
+    }
+    
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));    
+
+  </script>
+</body>
+</html>
