@@ -12,13 +12,17 @@ body {
   box-sizing: inherit;
 }
 
+button:focus, a:visited {
+    outline: none;
+}
+
 button {
     border: none;
     background-color: #a3014a;
     font-size: 2rem;
     color: white;
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     font-family: 'EB Garamond', serif;
     transition: background-color 1s;
     border-radius: 100%;
@@ -39,48 +43,53 @@ button:hover {
   box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
   color:white;
   text-align: center;
-  align-items:center;
+  align-items: center;
   font-size: 20px;
   background-size:cover;
   background-position:center;
   flex: 1;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.panel1 { background-image:url(./bridge.jpg); }
-.panel2 { background-image:url(./tunnel_pic.jpg); }
+.panel1 { background-image: url(./bridge.jpg); }
+.panel2 { background-image: url(./tunnel_pic.jpg); }
 
 .panel > * {
-  margin:0;
+  margin: 0;
   width: 100%;
   transition:transform 0.5s;
   justify-content: center;
   align-items: center;
 }
 
-.cta {
-  color:white;
-  text-decoration: none;
+.initials, .readButton {
+    position: absolute;
+    top: 50%;
 }
 
-.initials {
+.initials h1 {
     text-transform: uppercase;
     font-family: 'Josefin Sans', sans-serif;
     text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
     font-size: 3rem;
-    display: inline-block;
-    height: 400px;
-    padding-top: 50%;
+    color: white;
 }
 
+.initials a {
+    text-decoration: none;
+}
 
 .readButton {
-    margin-top: -80%;
+    margin-top: -10%;
     opacity: 0;
     transition: opacity .5s ease-out;
-    display: inline-block;
-    height: 400px;
+    width: 100%;
+}
+
+.readButton button {
+    margin-top: -2.5%;
 }
 
 .readButton:hover {
@@ -89,19 +98,16 @@ button:hover {
 
 @media (max-width: 900px) {
     
+    .initials, .readButton {
+        position: initial;
+    }
+    
     .readButton {
         opacity: 1;
         margin-top: 0;
     }
     
-    .readButton, button {
-        width: 200px;
-        height: 200px;
-    }
-    
     .initials {
-        min-height: 150px;
-        max-height: 150px;
         padding-top: 10%;
     }
     
